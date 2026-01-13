@@ -22,15 +22,23 @@ const AnalyticsDashboard: React.FC = () => {
           { label: 'Savings Est.', val: '$145.20', icon: 'fa-wallet', color: 'blue' },
           { label: 'Waste Redux', val: '28%', icon: 'fa-arrow-trend-down', color: 'rose' },
           { label: 'Shelf-Life Gain', val: '+2.4 Days', icon: 'fa-calendar-check', color: 'amber' },
-        ].map((card, i) => (
+        ].map((card, i) => {
+          const colorMap: { [key: string]: string } = {
+            emerald: '#10b981',
+            blue: '#3b82f6',
+            rose: '#f43f5e',
+            amber: '#f59e0b',
+          };
+          return (
           <div key={i} className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-            <div className={`text-${card.color}-500 mb-2`}>
-              <i className={`fas ${card.icon}`}></i>
+            <div className="mb-2" style={{ color: colorMap[card.color] || '#666' }}>
+              <i className={`fas ${card.icon} text-2xl`}></i>
             </div>
             <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">{card.label}</p>
             <p className="text-2xl font-black text-slate-800">{card.val}</p>
           </div>
-        ))}
+          );
+        })}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
