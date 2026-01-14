@@ -11,6 +11,7 @@ import { InventoryItem } from './types';
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [inventory, setInventory] = useState<InventoryItem[]>(MOCK_INVENTORY);
+  const [isDark, setIsDark] = useState(false);
 
   const handleItemsDetected = (newItems: InventoryItem[]) => {
     setInventory(prev => [...newItems, ...prev]);
@@ -37,11 +38,13 @@ const App: React.FC = () => {
   };
 
   return (
-    <Layout activeTab={activeTab} setActiveTab={setActiveTab}>
-      <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
-        {renderContent()}
-      </div>
-    </Layout>
+    <div className={isDark ? 'dark-theme' : 'light-theme'}>
+      <Layout activeTab={activeTab} setActiveTab={setActiveTab} isDark={isDark} setIsDark={setIsDark}>
+        <div className="animate-in fade-in slide-in-from-bottom-4 duration-700">
+          {renderContent()}
+        </div>
+      </Layout>
+    </div>
   );
 };
 
